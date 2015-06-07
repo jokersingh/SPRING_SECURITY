@@ -1,4 +1,4 @@
-package com.barun.springsecurity;
+package com.barun.springsecurity.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
