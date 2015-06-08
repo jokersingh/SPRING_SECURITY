@@ -9,7 +9,14 @@
 	<intercept-url pattern="/**" access="ROLE_USER"/>
 	
 	<form-login login-page="/login"/>
+	<session-management>
+    <concurrency-control
+       max-sessions="1"
+       expired-url="/timeout" />
+  </session-management>
+	
 </http>
+
 <authentication-manager>
 	<authentication-provider>
 		<user-service>

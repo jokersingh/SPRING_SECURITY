@@ -19,10 +19,10 @@
 </style>
 </head>
 <body>
-<c:if test="${not empty error}">
+<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
 	<div class="errorblock">
-		Your login is unsuccessful <br>
-		cause: ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+		Your login is unsuccessful !!<br>
+		cause: ${SPRING_SECURITY_LAST_EXCEPTION.message}
 	</div>
 </c:if>
 <form action="j_spring_security_check" method="post">

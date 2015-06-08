@@ -60,4 +60,13 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+	<!-- Session Management -->
+
+	<session-config>
+		<session-timeout>1</session-timeout>
+	</session-config>
+	<listener>
+  		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+	</listener>
+
 </web-app>
