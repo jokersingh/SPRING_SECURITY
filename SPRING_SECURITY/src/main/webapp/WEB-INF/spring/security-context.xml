@@ -5,15 +5,22 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 <http auto-config="true">
-	<intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-	<intercept-url pattern="/**" access="ROLE_USER"/>
+	<!-- allow login page for all users -->
+	<!-- <intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY"/> -->
 	
-	<form-login login-page="/login"/>
+	
+	<!-- <intercept-url pattern="/**" access="ROLE_USER"/> -->
+	
+	<!-- Basic http authentication -->
+	<!-- <http-basic/> -->
+	
+	<!-- form based authentication -->
+	<!-- <form-login login-page="/login"/>
 	<session-management>
     <concurrency-control
        max-sessions="1"
        expired-url="/timeout" />
-  </session-management>
+  </session-management> -->
 	
 </http>
 
