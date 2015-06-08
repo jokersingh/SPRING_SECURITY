@@ -1,0 +1,4 @@
+cmd:{server bin folder} keytool -genkey -alias tomcat -keyalg RSA -keystore {path}
+
+password: changeit
+re-password: changeit

@@ -25,6 +25,12 @@
 		cause: ${SPRING_SECURITY_LAST_EXCEPTION.message}
 	</div>
 </c:if>
+<c:if test="${error eq true}">
+	<div class="errorblock">
+		${msg}
+	</div>
+</c:if>
+
 <form action="j_spring_security_check" method="post">
 	<table>
 		<tr>
