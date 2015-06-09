@@ -1,77 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/security"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
-<!-- <http auto-config="true">
-	allow login page for all users
-	<intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-	<intercept-url pattern="/logout" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-	<intercept-url pattern="/loginfailed" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-	<intercept-url pattern="/403" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-	<intercept-url pattern="/admin" access="ROLE_ADMIN"/>
-	<intercept-url pattern="/**" access="ROLE_USER"/>
-	
-	Basic http authentication
-	<http-basic/>
-	
-	form based authentication
-	<form-login login-page="/login" authentication-failure-url="/loginfailed"/>
-	<session-management>
-    <concurrency-control
-       max-sessions="1"
-       expired-url="/timeout" />
-  </session-management>
-	<logout invalidate-session="true" logout-success-url="/logout" />
-	<access-denied-handler error-page="/403"/>
-</http> -->
+	<!-- <http auto-config="true"> allow login page for all users <intercept-url 
+		pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY"/> <intercept-url pattern="/logout" 
+		access="IS_AUTHENTICATED_ANONYMOUSLY"/> <intercept-url pattern="/loginfailed" 
+		access="IS_AUTHENTICATED_ANONYMOUSLY"/> <intercept-url pattern="/403" access="IS_AUTHENTICATED_ANONYMOUSLY"/> 
+		<intercept-url pattern="/admin" access="ROLE_ADMIN"/> <intercept-url pattern="/**" 
+		access="ROLE_USER"/> Basic http authentication <http-basic/> form based authentication 
+		<form-login login-page="/login" authentication-failure-url="/loginfailed"/> 
+		<session-management> <concurrency-control max-sessions="1" expired-url="/timeout" 
+		/> </session-management> <logout invalidate-session="true" logout-success-url="/logout" 
+		/> <access-denied-handler error-page="/403"/> </http> -->
 
-<http auto-config="true" use-expressions="true">
-	<!-- allow login page for all users -->
-	<intercept-url pattern="/login" access="permitAll" requires-channel="https" />
-	<intercept-url pattern="/logout" access="permitAll" requires-channel="https" />
-	<intercept-url pattern="/loginfailed" access="permitAll" requires-channel="https"/>
-	<intercept-url pattern="/403" access="permitAll" requires-channel="https" />
-	<intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" requires-channel="https" />
-	<intercept-url pattern="/**" access="permitAll" requires-channel="https" />
-	
-	<!-- Basic http authentication -->
-	<!-- <http-basic/> -->
-	
-	<!-- form based authentication -->
-	<form-login login-page="/login" authentication-failure-url="/loginfailed"/>
-	<session-management>
-    <concurrency-control
-       max-sessions="1"
-       expired-url="/timeout" />
-  </session-management>
-	<logout invalidate-session="true" logout-success-url="/logout" />
-	<access-denied-handler error-page="/403"/>
-</http>
+	<http auto-config="true" use-expressions="true">
+		<!-- allow login page for all users -->
+		<intercept-url pattern="/login" access="permitAll"
+			requires-channel="https" />
+		<intercept-url pattern="/logout" access="permitAll"
+			requires-channel="https" />
+		<intercept-url pattern="/loginfailed" access="permitAll"
+			requires-channel="https" />
+		<intercept-url pattern="/403" access="permitAll"
+			requires-channel="https" />
+		<intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"
+			requires-channel="https" />
+		<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"
+			requires-channel="https" />
+
+		<!-- Basic http authentication -->
+		<!-- <http-basic/> -->
+
+		<!-- form based authentication -->
+		<form-login login-page="/login" authentication-failure-url="/loginfailed" />
+		<session-management>
+			<concurrency-control max-sessions="1"
+				expired-url="/timeout" />
+		</session-management>
+		<logout invalidate-session="true" logout-success-url="/logout" />
+		<access-denied-handler error-page="/403" />
+	</http>
 
 
-<!-- ldap configuration -->
-<ldap-server ldif="classpath:users.ldif"/>
+	<!-- ldap configuration -->
+	<ldap-server ldif="classpath:users.ldif" />
 
-<authentication-manager>
-	<ldap-authentication-provider 
-		group-search-filter="member={0}"
-		group-search-base="ou=groups"
-		user-search-base="ou=people"
-		user-search-filter="uid={0}"
-	/>
-</authentication-manager>
+	<authentication-manager>
+		<ldap-authentication-provider
+			group-search-filter="member={0}" group-search-base="ou=groups"
+			user-search-base="ou=people" user-search-filter="uid={0}" />
+	</authentication-manager>
 
-<!-- Inline database for authentication -->
-<!-- <authentication-manager>
-	<authentication-provider>
-		<user-service>
-			<user name="barun" password="barun" authorities="ROLE_USER"/>
-			<user name="ashutosh" password="ashutosh" authorities="ROLE_USER,ROLE_ADMIN"/>
-		</user-service>
-	</authentication-provider>
-</authentication-manager> -->
+	<!-- Inline database for authentication -->
+	<!-- <authentication-manager> <authentication-provider> <user-service> <user 
+		name="barun" password="barun" authorities="ROLE_USER"/> <user name="ashutosh" 
+		password="ashutosh" authorities="ROLE_USER,ROLE_ADMIN"/> </user-service> 
+		</authentication-provider> </authentication-manager> -->
 </beans:beans>
