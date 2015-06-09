@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
 <html>
 <head>
@@ -14,9 +15,13 @@
 </head>
 <body>
 <h1>
-	Hello ${username}!  
+	Hello <sec:authentication property="principal.username"></sec:authentication>!  
 </h1>
-<a class="btn btn-success" href="/springsecurity/admin">Admin</a> <a class="btn btn-warning" href="j_spring_security_logout">Logout</a>
+<a class="btn btn-success" href="/springsecurity/admin">Admin</a> 
+<%-- <sec:authorize ifAnyGranted="hasRole('ROLE_SUPERVISOR')">
+<a class="btn btn-success" href="/springsecurity/admin">Admin</a>
+</sec:authorize> --%>
+<a class="btn btn-warning" href="j_spring_security_logout">Logout</a>
 <P>  The time on the server is ${serverTime}. </P>
 </body>
 </html>
